@@ -1,1 +1,16 @@
-<p>login works!</p>
+
+<div class="basic-content">
+    <h1>OPSZ service tracking system</h1>
+    <mat-form-field>
+        <mat-label for="email">Email: </mat-label><input matInput type="text" [formControl]="email" />
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label for="password">Password: </mat-label><input matInput type="password" [formControl]="password" />
+    </mat-form-field>
+    <span>
+        <span><button mat-raised-button color="primary" (click)="login()">Login</button></span>
+        <span><button mat-raised-button color="primary" [routerLink]="'/registration'">Registration</button></span>
+    </span>
+    <!-- AsyncPipe -->
+    <!-- <p>{{loadingObservation | async}}</p> -->
+</div>
