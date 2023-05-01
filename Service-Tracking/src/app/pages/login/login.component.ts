@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 
@@ -10,8 +10,10 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  email = new FormControl('');
-  password = new FormControl('');
+  loginForm = new FormGroup({
+    email: new FormControl(''),
+    password: new FormControl('')
+  });
 
   constructor(private router: Router) { }
 

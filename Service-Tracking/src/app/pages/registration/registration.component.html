@@ -1,6 +1,6 @@
-<div class="basic-content">
+<div class="basic-align">
     <h1>Register an account!</h1>
-    <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+    <form class="basic-align" [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
         <mat-form-field>
             <mat-label for="email">Email: </mat-label>
             <input matInput type="text" formControlName="email" />
@@ -13,12 +13,9 @@
             <mat-label for="rePassword">Confirm password: </mat-label>
             <input matInput type="password" formControlName="rePassword" />
         </mat-form-field>
-        <div>
-            <span class="buttons">
-                <button mat-raised-button color="primary" type="submit">Register</button>
-            </span><span class="buttons">
-                <button mat-raised-button color="primary" routerLink="/login" >Back</button>
-            </span>
+        <div class="basic-align">
+            <button class="form-btn" mat-raised-button color="primary" type="submit">Register</button>
+            <button class="form-btn" mat-raised-button color="primary" routerLink="/login" >Login</button>
         </div>
     </form>
 </div>

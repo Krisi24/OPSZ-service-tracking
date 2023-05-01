@@ -5,7 +5,14 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
-.basic-content {
-    height: 100vh;
+.basic-align {
+    display: flex;
+    justify-content: center;
     align-items: center;
+    flex-flow: column;
+    gap: 5px;
+}
+
+.form-btn {
+    width: 10em;
 }
