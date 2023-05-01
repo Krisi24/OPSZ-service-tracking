@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "service-tracking-95ddc": {
+      "hosting": {
+        "Service-Tracking": [
+          "service-tracking-95ddc"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "service-tracking-95ddc"
+  }
+}

@@ -102,6 +102,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "Service-Tracking:build:production",
+            "firebaseProject": "service-tracking-95ddc",
+            "firebaseHostingSite": "service-tracking-95ddc"
+          }
         }
       }
     }

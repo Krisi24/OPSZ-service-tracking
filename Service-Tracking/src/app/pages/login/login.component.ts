@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { AuthService  } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -10,19 +10,31 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
+  loggedInUser?: firebase.default.User | null;
+
   loginForm = new FormGroup({
     email: new FormControl(''),
     password: new FormControl('')
   });
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
   }
 
-  login() {
+  onSubmit() {
+    this.authService.login(this.loginForm.get('email')?.value as string, this.loginForm.get('password')?.value as string).then( cred => {
+      this.authService.isUserLoggedIn().subscribe(user => {
+        this.loggedInUser = user;
+        localStorage.setItem('user', JSON.stringify(this.loggedInUser));
+      }, error => {
+        localStorage.setItem('user', JSON.stringify('null'));
+      });
+      this.router.navigateByUrl("/service-tracking");
+    }).catch( error => {
+      alert("Login is unsuccessful");
+    });
     console.log("login");
-    this.router.navigateByUrl("/service-tracking");
   }
 
 }

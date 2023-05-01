@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-service-tracking',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ServiceTrackingComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private auth: AuthService) { }
 
   ngOnInit(): void {
+  }
+
+  logout(): void {
+    this.auth.logout().then( () => {
+      localStorage.setItem('user', JSON.stringify(null));
+      this.router.navigateByUrl("/login");
+    }).catch( error => {
+      console.log(error);
+    });
   }
 
 }

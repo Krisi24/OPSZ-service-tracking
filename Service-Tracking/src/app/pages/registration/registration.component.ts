@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms'
 import { Router } from '@angular/router'
+import { AuthService  } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-registration',
@@ -15,14 +16,19 @@ export class RegistrationComponent implements OnInit {
     rePassword: new FormControl('')
   });
   
-  constructor(private router: Router) { }
+  constructor(private router: Router, private auth: AuthService) { }
 
   ngOnInit(): void {
   }
 
   onSubmit(): void {
     console.log("reg");
-    this.router.navigateByUrl("/login");
+    this.auth.signup(this.signUpForm.get('email')?.value as string, this.signUpForm.get('password')?.value as string).then( cred => {
+      this.router.navigateByUrl("/login");
+      console.log("successfull registration");
+    }).catch(error => {
+      console.log(error);
+    });
   }
 
 }
