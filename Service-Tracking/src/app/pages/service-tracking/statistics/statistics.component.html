@@ -1,1 +1,8 @@
 <p>statistics works!</p>
+
+<button mat-raised-button color="primary" routerLink="/service-tracking" >main</button>
+
+
+<input type="text"  [formControl]="name" />
+<input type="date"  [formControl]="born" />
+<button mat-raised-button color="primary" (click)="addAssociation()">add</button>

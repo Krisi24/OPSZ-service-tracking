@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ReportRoutingModule } from './report-routing.module';
 import { ReportComponent } from './report.component';
+import { MatButtonModule } from '@angular/material/button'
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { ReportComponent } from './report.component';
   ],
   imports: [
     CommonModule,
-    ReportRoutingModule
+    ReportRoutingModule,
+    MatButtonModule
   ]
 })
 export class ReportModule { }
