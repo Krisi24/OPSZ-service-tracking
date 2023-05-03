@@ -7,12 +7,12 @@ import { User } from '../models/User';
 })
 export class UserService {
 
-  static colletcionName: string = 'Users' 
+  private collectionName: string = 'Users' 
 
   constructor(private afs: AngularFirestore) { }
 
-  create(): void {
-    this.afs.collection<User>
+  create(new_user: User) {
+    return this.afs.collection<User>(this.collectionName).add(new_user);
   }
 
 }
