@@ -6,4 +6,12 @@ h1 {
     margin: 1em;
     color: $tertiary-clr;
     text-shadow: 2px 2px 10px  #000000;
+    line-height: 1.2em;
+}
+
+#email-icon {
+    position: relative;
+    top: .25em;
+    height: 100%;
+    padding: .5em;
 }
