@@ -5,6 +5,8 @@ import { ServiceTrackingRoutingModule } from './service-tracking-routing.module'
 import { ServiceTrackingComponent } from './service-tracking.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MatButtonModule } from '@angular/material/button'
+import { MatMenuModule } from '@angular/material/menu'
+import { MatIconModule } from '@angular/material/icon'
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { MatButtonModule } from '@angular/material/button'
   imports: [
     CommonModule,
     ServiceTrackingRoutingModule,
-    MatButtonModule
+    MatButtonModule,
+    MatMenuModule,
+    MatIconModule,
   ]
 })
 export class ServiceTrackingModule { }

@@ -1,8 +1,11 @@
 @import 'variables';
 
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+    height: 100%;
+    background-color: $secondary-clr;
+}
+body { margin: 16px; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
 .basic-align {
@@ -15,4 +18,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .form-btn {
     width: 10em;
+}
+
+.login-form, .register-form {
+    background-color: $tertiary-clr;
+    border-radius: .5em;
+    padding: 2em;
 }

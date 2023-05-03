@@ -1,1 +1,22 @@
-<p>sidebar works!</p>
+<button id="menu" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/service-tracking/report">
+        <mat-icon>note_add</mat-icon>   
+        <span>report</span>
+    </button>
+    <button mat-menu-item routerLink="/service-tracking/statistics">
+      <mat-icon>assessment</mat-icon>
+      <span>statistics</span>
+    </button>
+    <button mat-menu-item routerLink="/service-tracking/user">
+        <mat-icon>people</mat-icon>
+        <span>User</span>
+    </button>
+    <button mat-menu-item (click)="logout()" >
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Logout</span>
+    </button>
+  </mat-menu>
+  
