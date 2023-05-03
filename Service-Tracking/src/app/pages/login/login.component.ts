@@ -29,10 +29,10 @@ export class LoginComponent implements OnInit {
       this.authService.isUserLoggedIn().subscribe(user => {
         this.loggedInUser = user;
         localStorage.setItem('user', JSON.stringify(this.loggedInUser));
+        this.router.navigateByUrl("/service-tracking");
       }, error => {
-        localStorage.setItem('user', JSON.stringify('null'));
+        localStorage.setItem('user', JSON.stringify(null));
       });
-      this.router.navigateByUrl("/service-tracking");
     }).catch( error => {
       alert("Login is unsuccessful");
     });

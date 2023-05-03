@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../../../models/User'
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-user',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserComponent implements OnInit {
 
-  constructor() { }
+  user: User | null = null;
+
+  constructor(private router: Router,private userService: UserService) { }
 
   ngOnInit(): void {
-  }
+    this.userService.getLoggedUser( localStorage.getItem('user.email') as string).subscribe( (res: any) => {
+      this.user = {
+        name: res[0].name,
+        email: res[0].email,
+        serviceID: res[0].serviceID
+      }
+    })
+  } 
 
 }

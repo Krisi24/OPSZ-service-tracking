@@ -15,4 +15,8 @@ export class UserService {
     return this.afs.collection<User>(this.collectionName).add(new_user);
   }
 
+  getLoggedUser(email: string) {
+    return this.afs.collection<User>(this.collectionName, ref => ref.where('email', '==', 'krisi2@gmail.com').limit(1) ).valueChanges();
+  }
+
 }

@@ -1,0 +1,11 @@
+.user-card {
+    width: fit-content;
+    margin: 1em auto;
+    box-shadow: 2px 2px 20px black;
+    & .data-container { 
+        padding-top: .5em;
+    }
+    & .data { 
+        font-weight: 600;
+    }
+}
