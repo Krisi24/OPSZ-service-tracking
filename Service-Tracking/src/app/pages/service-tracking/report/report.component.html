@@ -1,4 +1,41 @@
 <button mat-raised-button routerLink="/service-tracking" >
     <mat-icon>arrow_back_ios</mat-icon>
 </button>
-<p>report works!</p>
+
+<h1>Reports</h1>
+<div class="main-section">
+    <mat-accordion class="basic-align report-list">
+        <mat-expansion-panel class="panel">
+        <mat-expansion-panel-header>
+            Create a new report
+        </mat-expansion-panel-header>
+        <mat-label for="start_date">Start</mat-label><br>
+        <input type="datetime-local" [formControl]="start_date"><br>
+        <mat-label for="end_date">End</mat-label><br>
+        <input type="datetime-local" [formControl]="end_date"><br>
+            <mat-label for="description">Description</mat-label>
+            <textarea rows="20" matInput type="text" [formControl]="description" ></textarea>
+          <br>
+          <button mat-flat-button (click)="createReport()" >Send Report</button>
+        </mat-expansion-panel>
+    
+        <mat-expansion-panel hideToggle class="panel" *ngFor="let report of reports; index as i" >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{i + 1}}.
+            </mat-panel-title>
+            <mat-panel-title>
+                <span class="bold">Starting Time:</span> {{report.start_date}}
+            </mat-panel-title>
+            <mat-panel-description>
+              {{ report.description.substr(0, 10) }} ...
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <mat-panel-title>
+            <span class="bold">Ending Time:</span> {{report.end_date}}
+          </mat-panel-title>
+           <div><span class="bold">Description: </span> {{report.description}}</div>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>
+  

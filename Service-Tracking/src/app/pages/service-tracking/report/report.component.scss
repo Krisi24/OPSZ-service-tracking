@@ -1,0 +1,28 @@
+
+
+h1 {
+    text-align: center;
+    font-size: 48px;
+    margin-bottom: .5em;
+}
+
+.main-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.report-list {
+    margin: 1em;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.panel, textarea {
+    width: 100%;
+}
+
+.bold {
+    font-weight: bolder;
+    padding-right: 1em;
+}

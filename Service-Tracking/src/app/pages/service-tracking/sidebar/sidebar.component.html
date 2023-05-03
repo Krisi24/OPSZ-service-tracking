@@ -1,4 +1,4 @@
-<button id="menu" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+<button id="menu" mat-icon-button [matMenuTriggerFor]="menu">
     <mat-icon>more_vert</mat-icon>
 </button>
 <mat-menu #menu="matMenu">
@@ -12,7 +12,7 @@
   </button>
   <button mat-menu-item routerLink="/service-tracking/user">
       <mat-icon>people</mat-icon>
-      <span>User</span>
+      <span>Profile</span>
   </button>
   <button mat-menu-item (click)="logout()" >
       <mat-icon>exit_to_app</mat-icon>

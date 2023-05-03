@@ -15,7 +15,7 @@ export class UserComponent implements OnInit {
   constructor(private router: Router,private userService: UserService) { }
 
   ngOnInit(): void {
-    this.userService.getLoggedUser( localStorage.getItem('user.email') as string).subscribe( (res: any) => {
+    this.userService.getLoggedUser( JSON.parse(localStorage.getItem('user') as string).email).subscribe( (res: any) => {
       this.user = {
         name: res[0].name,
         email: res[0].email,
