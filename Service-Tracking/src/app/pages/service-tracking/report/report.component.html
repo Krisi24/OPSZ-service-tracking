@@ -14,7 +14,7 @@
         <mat-label for="end_date">End</mat-label><br>
         <input type="datetime-local" [formControl]="end_date"><br>
             <mat-label for="description">Description</mat-label>
-            <textarea rows="20" matInput type="text" [formControl]="description" ></textarea>
+            <textarea rows="20" matInput type="text" [formControl]="description" [ngStyle]="{'background-color': description.value !== '' ? 'white' : '#C1C7D3' }"></textarea>
           <br>
           <button mat-flat-button color="primary" (click)="createReport()" >Send Report</button>
         </mat-expansion-panel>
@@ -25,14 +25,14 @@
                 {{i + 1}}.
             </mat-panel-title>
             <mat-panel-title>
-                <span class="bold">Starting Time:</span> {{report.start_date}}
+                <span class="bold">Starting Time:</span> {{report.start_date | dateFormat}}
             </mat-panel-title>
             <mat-panel-description>
               {{ report.description.substr(0, 10) }} ...
             </mat-panel-description>
           </mat-expansion-panel-header>
           <mat-panel-title>
-            <span class="bold">Ending Time:</span> {{report.end_date}}
+            <span class="bold">Ending Time:</span> {{report.end_date | dateFormat}}
           </mat-panel-title>
            <div><span class="bold">Description: </span> {{report.description}}</div>
            <button mat-flat-button color="primary" (click)="deleteReport(report)" >Delete</button>

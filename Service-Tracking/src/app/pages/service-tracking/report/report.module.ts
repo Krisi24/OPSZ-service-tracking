@@ -12,12 +12,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { UpdateReportComponent } from './update-report/update-report.component'
+import { DateFormatPipe } from '../../../pipes/date-format.pipe';
 
 
 @NgModule({
   declarations: [
     ReportComponent,
-    UpdateReportComponent
+    UpdateReportComponent,
+    DateFormatPipe
   ],
   imports: [
     CommonModule,
