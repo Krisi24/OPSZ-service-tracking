@@ -1,4 +1,4 @@
-
+@import '../../../../variables';
 
 h1 {
     text-align: center;
@@ -24,6 +24,17 @@ h1 {
 
 .panel, textarea {
     width: 100%;
+}
+
+.dark-panel {
+    background-color: $gray-clr;
+    color: $tertiary-clr;
+    & *{
+        color: $tertiary-clr;
+    }
+    & .bold {
+        font-weight: 400;
+    }
 }
 
 .bold {

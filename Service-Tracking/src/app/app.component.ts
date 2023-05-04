@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +9,7 @@ export class AppComponent implements OnInit{
   title = 'Service-Tracking';
   loggedInUser?: firebase.default.User | null;
 
-  constructor(private authService: AuthService){}
+  constructor(){}
 
   ngOnInit(): void {
     

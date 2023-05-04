@@ -1,5 +1,5 @@
 <app-sidebar mode="side"></app-sidebar>
 
-<h1>Welcome {{user.name}}!</h1>
+<h1>Welcome {{!!user.name ? user.name : ''}}!</h1>
 
 

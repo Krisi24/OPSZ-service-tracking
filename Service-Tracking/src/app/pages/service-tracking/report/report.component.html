@@ -19,7 +19,7 @@
           <button mat-flat-button color="primary" (click)="createReport()" >Send Report</button>
         </mat-expansion-panel>
     
-        <mat-expansion-panel hideToggle class="panel" *ngFor="let report of reports; index as i" >
+        <mat-expansion-panel hideToggle class="panel" *ngFor="let report of reports; index as i" [ngClass]="{'dark-panel': (i % 2 == 1)}">
           <mat-expansion-panel-header>
             <mat-panel-title>
                 {{i + 1}}.
