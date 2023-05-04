@@ -7,7 +7,7 @@
     <mat-accordion class="basic-align report-list">
         <mat-expansion-panel class="panel">
         <mat-expansion-panel-header>
-            Create a new report
+            <span class="bold">Create a new report</span>
         </mat-expansion-panel-header>
         <mat-label for="start_date">Start</mat-label><br>
         <input type="datetime-local" [formControl]="start_date"><br>
@@ -16,7 +16,7 @@
             <mat-label for="description">Description</mat-label>
             <textarea rows="20" matInput type="text" [formControl]="description" ></textarea>
           <br>
-          <button mat-flat-button (click)="createReport()" >Send Report</button>
+          <button mat-flat-button color="primary" (click)="createReport()" >Send Report</button>
         </mat-expansion-panel>
     
         <mat-expansion-panel hideToggle class="panel" *ngFor="let report of reports; index as i" >
@@ -35,7 +35,12 @@
             <span class="bold">Ending Time:</span> {{report.end_date}}
           </mat-panel-title>
            <div><span class="bold">Description: </span> {{report.description}}</div>
+           <button mat-flat-button color="primary" (click)="deleteReport(report)" >Delete</button>
+           <button mat-flat-button color="primary" (click)="updateReport(report)" >change</button>
         </mat-expansion-panel>
+
+        <mat-error *ngIf="!reports">Not loaded any report.</mat-error>
     </mat-accordion>
 </div>
-  
+
+<app-update-report class="update-report" (new_report)="closeUpdateReport()" [report]="this.old_report" *ngIf="this.show_update_report"></app-update-report>

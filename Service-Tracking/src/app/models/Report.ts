@@ -3,4 +3,5 @@ export interface Report {
     end_date: Date;
     description: string;
     ID?: string;
+    serviceID: string;
 }

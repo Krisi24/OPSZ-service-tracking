@@ -21,7 +21,7 @@ export class UserComponent implements OnInit {
         email: res[0].email,
         serviceID: res[0].serviceID
       }
-    })
+    });
   } 
 
 }

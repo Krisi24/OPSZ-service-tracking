@@ -7,7 +7,7 @@ import { Report } from '../models/Report';
 })
 export class ReportService {
 
-  private collectionName: string = ' Reports' 
+  private collectionName: string = 'Reports' 
 
   constructor(private afs: AngularFirestore) { }
 
@@ -16,15 +16,15 @@ export class ReportService {
   }
 
   getAll() {
-    return this.afs.collection<Report>(this.collectionName).valueChanges();
+    return this.afs.collection<Report>(this.collectionName).valueChanges({ idField: 'ID' });
   }
 
-  update(report: Report) {
-    return this.afs.collection<Report>(this.collectionName, ref => ref.where('Reports', '==', report) ).doc().set(report);
+  update(ID: string, new_report: Report) {
+    return this.afs.collection<Report>(this.collectionName).doc(ID).set(new_report);
   }
 
-  delete(id: string) {
-    return this.afs.collection<Report>(this.collectionName).doc(id).delete();
+  delete(ID: string) {
+    return this.afs.collection<Report>(this.collectionName).doc(ID).delete();
   }
 
 }
