@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Report } from 'src/app/models/Report';
 import { ReportService } from 'src/app/services/report.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-report',
@@ -10,7 +11,7 @@ import { ReportService } from 'src/app/services/report.service';
 })
 export class ReportComponent implements OnInit {
 
-  constructor(private reportService: ReportService) { }
+  constructor(private reportService: ReportService, private userService: UserService) { }
 
   reports: any = undefined;
   show_update_report: boolean = false;
@@ -25,6 +26,9 @@ export class ReportComponent implements OnInit {
   new_end_date = new FormControl(new Date());
   
   ngOnInit(): void {
+    this.userService.getLoggedUser(JSON.parse(localStorage.getItem('user') as string).email).subscribe( (res: any) => {
+      localStorage.setItem('serviceID', res[0].serviceID as string);
+    });
     this.reportService.getAll().subscribe( (res: any) => {
       this.reports = res;
     });
@@ -35,9 +39,10 @@ export class ReportComponent implements OnInit {
       description: this.description?.value as string,
       start_date: this.start_date?.value as Date,
       end_date: this.end_date?.value as Date,
-      serviceID: localStorage.getItem('sericeID') as string
+      serviceID: (localStorage.getItem('serviceID') as string)
     }
     this.reportService.create(report).then( res => {
+      this.description.setValue('');
       alert("Report is successfully created!")
     })
   }
@@ -53,15 +58,27 @@ export class ReportComponent implements OnInit {
   }
 
   updateReport(report: Report){
-    this.new_description.setValue(report.description);
-    this.new_start_date.setValue(report.start_date);
-    this.new_end_date.setValue(report.end_date);
+    this.old_report = {
+      description: report.description,
+      start_date: report.start_date,
+      end_date: report.end_date,
+      serviceID: (localStorage.getItem('serviceID') as string),
+      ID: report.ID
+    }
 
     this.show_update_report = true;
   }
 
-  closeUpdateReport(){
+  closeUpdateReport(event: any){
     this.show_update_report = false;
+    if(event === null ){
+      // todo
+    } else {
+      this.reportService.update(event).then(() =>{
+        //Todo
+      });
+    }
+
   }
 
 

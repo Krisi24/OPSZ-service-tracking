@@ -30,17 +30,13 @@ export class LoginComponent implements OnInit {
       this.authService.isUserLoggedIn().subscribe(user => {
         this.loggedInUser = user;
         localStorage.setItem('user', JSON.stringify(this.loggedInUser));
+         this.router.navigateByUrl("service-tracking");
       }, error => {
         localStorage.setItem('user', JSON.stringify(null));
       });
-      this.userService.getLoggedUser(JSON.parse(localStorage.getItem('user') as string).email).subscribe( (res: any) => {
-        localStorage.setItem('sericeID', JSON.stringify(res[0].serviceID));
-        this.router.navigateByUrl("/service-tracking");
-      });
     }).catch( error => {
-      alert("Login is unsuccessful");
+      // alert("Login is unsuccessful");
     });
-    console.log("login");
   }
 
 }

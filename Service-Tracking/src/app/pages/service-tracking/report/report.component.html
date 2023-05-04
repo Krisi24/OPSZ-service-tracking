@@ -43,4 +43,4 @@
     </mat-accordion>
 </div>
 
-<app-update-report class="update-report" (new_report)="closeUpdateReport()" [report]="this.old_report" *ngIf="this.show_update_report"></app-update-report>
+<app-update-report class="update-report" (new_report)="closeUpdateReport($event)" [report]="this.old_report" *ngIf="this.show_update_report"></app-update-report>

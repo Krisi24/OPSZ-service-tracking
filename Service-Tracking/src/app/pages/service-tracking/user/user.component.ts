@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../../models/User'
-import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -12,7 +11,7 @@ export class UserComponent implements OnInit {
 
   user: User | null = null;
 
-  constructor(private router: Router,private userService: UserService) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
     this.userService.getLoggedUser( JSON.parse(localStorage.getItem('user') as string).email).subscribe( (res: any) => {

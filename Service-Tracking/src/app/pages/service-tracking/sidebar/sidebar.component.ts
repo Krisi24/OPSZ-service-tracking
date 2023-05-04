@@ -17,6 +17,7 @@ export class SidebarComponent implements OnInit {
   logout(): void {
     this.auth.logout().then( () => {
       localStorage.setItem('user', JSON.stringify(null));
+      localStorage.setItem('serviceID', JSON.stringify(null));
       this.router.navigateByUrl("/login");
     }).catch( error => {
       console.log(error);

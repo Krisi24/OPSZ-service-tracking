@@ -16,11 +16,17 @@ export class ReportService {
   }
 
   getAll() {
-    return this.afs.collection<Report>(this.collectionName).valueChanges({ idField: 'ID' });
+    return this.afs.collection<Report>(this.collectionName,  ref => ref.where('serviceID', '==', (localStorage.getItem('serviceID') as string))).valueChanges({ idField: 'ID' });
   }
 
-  update(ID: string, new_report: Report) {
-    return this.afs.collection<Report>(this.collectionName).doc(ID).set(new_report);
+  update(new_report: Report) {
+    const report = {
+      description: new_report.description,
+      start_date: new_report.start_date,
+      end_date: new_report.end_date,
+      serviceID: (localStorage.getItem('serviceID') as string)
+    }
+    return this.afs.collection<Report>(this.collectionName).doc(new_report.ID).update(report);
   }
 
   delete(ID: string) {

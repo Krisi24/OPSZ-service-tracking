@@ -20,14 +20,22 @@ export class UpdateReportComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.description.setValue(this.report.description);
+    this.start_date.setValue(this.report.start_date);
+    this.end_date.setValue(this.report.end_date);
   }
 
   updateReport(){
-    
+    this.new_report.emit({
+      description: this.description.value,
+      start_date: this.start_date.value,
+      end_date: this.end_date.value,
+      ID: this.report.ID
+    });
   }
 
-  close(event: any){
-    this.new_report.emit();
+  close(){
+    this.new_report.emit(null);
   }
 
 }
