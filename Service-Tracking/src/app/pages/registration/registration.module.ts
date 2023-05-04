@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button'
 
 import { RegistrationRoutingModule } from './registration-routing.module';
 import { RegistrationComponent } from './registration.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { RegistrationComponent } from './registration.component';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatSnackBarModule
   ]
 })
 export class RegistrationModule { }

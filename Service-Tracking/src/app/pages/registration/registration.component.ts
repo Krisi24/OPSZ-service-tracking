@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms'
 import { Router } from '@angular/router'
 import { AuthService  } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
+import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition,} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-registration',
@@ -19,8 +20,11 @@ export class RegistrationComponent implements OnInit {
   });
 
   hide: boolean = true;
+
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
   
-  constructor(private router: Router, private auth: AuthService, private userService: UserService) { }
+  constructor(private router: Router, private auth: AuthService, private userService: UserService, private _errorBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
@@ -38,10 +42,14 @@ export class RegistrationComponent implements OnInit {
       this.userService.create(user).then( () => {
         // TODO...
       }).catch(error => {
-        // console.log(error);
       });
     }).catch(error => {
       // console.log(error);
+      this._errorBar.open(error, 'close',{
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+        duration: 2500
+      });
     });
   }
 

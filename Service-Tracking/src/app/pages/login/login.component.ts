@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService  } from 'src/app/services/auth.service';
-import { UserService  } from 'src/app/services/user.service';
+import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition,} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +20,10 @@ export class LoginComponent implements OnInit {
 
   hide: boolean = true;
 
-  constructor(private router: Router, private authService: AuthService, private userService: UserService) { }
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+
+  constructor(private router: Router, private authService: AuthService, private _errorBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
@@ -33,9 +36,18 @@ export class LoginComponent implements OnInit {
          this.router.navigateByUrl("service-tracking");
       }, error => {
         localStorage.setItem('user', JSON.stringify(null));
+        this._errorBar.open(error, 'close',{
+          horizontalPosition: this.horizontalPosition,
+          verticalPosition: this.verticalPosition,
+          duration: 2500
+        });
       });
     }).catch( error => {
-      // alert("Login is unsuccessful");
+      this._errorBar.open(error, 'close',{
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+        duration: 2500
+      });
     });
   }
 
