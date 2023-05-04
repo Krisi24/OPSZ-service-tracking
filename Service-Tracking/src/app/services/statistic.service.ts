@@ -12,13 +12,10 @@ export class StatisticService {
   constructor(private afs: AngularFirestore) { }
 
   create(association: Assosiation) {
-    return this.afs.collection<Assosiation>(this.collectionName).add(association); // .doc(ass.id).set(ass);
-  }
-  asdcreate(association: Assosiation) {
-    return this.afs.collection<Assosiation>(this.collectionName, ref => ref.where('imageId', '==', 1).orderBy('date', 'asc')).valueChanges();
+    return this.afs.collection<Assosiation>(this.collectionName).add(association);
   }
 
-  getCommentsByImageId(imageId: string) {
-    return this.afs.collection<Comment>(this.collectionName, ref => ref.where('imageId', '==', imageId).orderBy('date', 'asc')).valueChanges();
+  getAssociationList() {
+    return this.afs.collection<Comment>(this.collectionName).valueChanges();
   }
 }

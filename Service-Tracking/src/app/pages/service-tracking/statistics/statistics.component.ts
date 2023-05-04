@@ -13,9 +13,15 @@ export class StatisticsComponent implements OnInit {
   name =  new FormControl('');
   born =  new FormControl(new Date);
 
+  displayedColumns: string[] = ['name', 'born'];
+  associations: Assosiation[] = [];
+
   constructor(private statisticService: StatisticService) { }
 
   ngOnInit(): void {
+    this.statisticService.getAssociationList().subscribe( (res: any) => {
+      this.associations = res;
+    });
   }
 
 

@@ -1,9 +1,39 @@
 <button mat-raised-button routerLink="/service-tracking" >
     <mat-icon >arrow_back_ios</mat-icon>
 </button>
-<p>statistics works!</p>
 
+<div class="basic-align">
+    
+    <div class="input">
+        <label for="name">Name</label>
+        <input type="text"  [formControl]="name" />
+    </div>
+    <input type="date"  [formControl]="born" />
+    <button mat-raised-button color="primary" (click)="addAssociation()">add association</button>
 
-<input type="text"  [formControl]="name" />
-<input type="date"  [formControl]="born" />
-<button mat-raised-button color="primary" (click)="addAssociation()">add</button>
+    <table mat-table [dataSource]="associations" class="mat-elevation-z8">
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+    
+        <!-- born Column -->
+        <ng-container matColumnDef="born">
+        <th mat-header-cell *matHeaderCellDef> Born Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.born}} </td>
+        </ng-container>
+    
+        <!-- reports Column
+        <ng-container matColumnDef="reports">
+        <th mat-header-cell *matHeaderCellDef> reports </th>
+        <td mat-cell *matCellDef="let element"> {{' '}} </td>
+        </ng-container> -->
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    
+    
+</div>
