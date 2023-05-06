@@ -19,4 +19,8 @@ export class UserService {
     return this.afs.collection<User>(this.collectionName, ref => ref.where('email', '==', email).limit(1) ).valueChanges();
   }
 
+  getAllUsers() {
+    return this.afs.collection<User>(this.collectionName).valueChanges();
+  }
+
 }
