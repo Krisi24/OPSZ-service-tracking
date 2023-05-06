@@ -15,8 +15,12 @@ export class ReportService {
     return this.afs.collection<Report>(this.collectionName).add(new_report);
   }
 
-  getAll() {
+  getMyAll() {
     return this.afs.collection<Report>(this.collectionName,  ref => ref.where('serviceID', '==', (localStorage.getItem('serviceID') as string))).valueChanges({ idField: 'ID' });
+  }
+  
+  getAll() {
+    return this.afs.collection<Report>(this.collectionName).valueChanges({ idField: 'ID' });
   }
 
   update(new_report: Report) {

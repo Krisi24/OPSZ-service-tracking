@@ -29,7 +29,7 @@ export class ReportComponent implements OnInit {
     this.userService.getLoggedUser(JSON.parse(localStorage.getItem('user') as string).email).subscribe( (res: any) => {
       localStorage.setItem('serviceID', res[0].serviceID as string);
     });
-    this.reportService.getAll().subscribe( (res: any) => {
+    this.reportService.getMyAll().subscribe( (res: any) => {
       this.reports = res;
     });
   }

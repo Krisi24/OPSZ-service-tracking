@@ -34,6 +34,19 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+
+    <h1>{{active_members !== null ? active_members.name + ' ' + (active_members.value / active_members.max_value) * 100 + ' %' : ''}}</h1>
+    <mat-card *ngIf="active_members !== null">
+        <mat-card-content>
+          <mat-progress-spinner
+            color="primary"
+            mode="determinate"
+            [value]="(active_members.value / active_members.max_value) * 100"
+            [strokeWidth]="15">
+          </mat-progress-spinner>
+        </mat-card-content>
+      </mat-card>
+      
     
     
 </div>

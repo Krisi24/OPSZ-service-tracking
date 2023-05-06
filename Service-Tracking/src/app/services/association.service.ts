@@ -5,7 +5,7 @@ import { Assosiation } from '../models/Association';
 @Injectable({
   providedIn: 'root'
 })
-export class StatisticService {
+export class AssociationService {
 
   private collectionName: string = 'association' 
 
@@ -18,4 +18,5 @@ export class StatisticService {
   getAssociationList() {
     return this.afs.collection<Comment>(this.collectionName).valueChanges();
   }
+  
 }
