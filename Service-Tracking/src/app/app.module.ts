@@ -13,6 +13,7 @@ import { provideStorage,getStorage } from '@angular/fire/storage'
 import { AngularFireModule } from '@angular/fire/compat';
 import { AuthGuard } from './services/auth.guard';
 import { LoggedGuard } from './services/logged.guard';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { LoggedGuard } from './services/logged.guard';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatButtonModule,
+    MatSnackBarModule,
     AngularFireModule.initializeApp(environment.firebase),
     //provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),

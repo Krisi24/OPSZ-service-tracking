@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { AuthService  } from 'src/app/services/auth.service';
@@ -11,6 +11,8 @@ import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition,
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements  OnInit {
+
+  @Output() reg_success = new EventEmitter();
 
   users: any;
   
@@ -75,6 +77,9 @@ export class RegistrationComponent implements  OnInit {
           serviceID: (Math.floor(Math.random() * 99999999) + 10000000).toString(),
         }
         this.userService.create(user).then( () => {
+          this.reg_success.emit({
+            email: user.email
+          })
           this.router.navigateByUrl("/login");
         }).catch(error => {
           this.errorMessage('Registration is unsuccessful!');

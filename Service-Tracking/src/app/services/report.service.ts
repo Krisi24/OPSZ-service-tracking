@@ -16,7 +16,7 @@ export class ReportService {
   }
 
   getMyAll() {
-    return this.afs.collection<Report>(this.collectionName,  ref => ref.where('serviceID', '==', (localStorage.getItem('serviceID') as string))).valueChanges({ idField: 'ID' });
+    return this.afs.collection<Report>(this.collectionName,  ref => ref.where('serviceID', '==', (localStorage.getItem('serviceID') as string)).orderBy('start_date', 'desc')).valueChanges({ idField: 'ID' });
   }
   
   getAll() {
