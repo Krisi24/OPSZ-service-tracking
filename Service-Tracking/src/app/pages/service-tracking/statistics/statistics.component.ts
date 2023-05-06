@@ -21,6 +21,8 @@ export class StatisticsComponent implements OnInit, OnChanges, OnDestroy {
   associations: Assosiation[] = [];
   active_members: Statistic | null = null;
 
+  obs: any = [];
+
   constructor(private association: AssociationService,
      private statisticsService: StatisticsService,
      private reportService: ReportService,
@@ -28,20 +30,29 @@ export class StatisticsComponent implements OnInit, OnChanges, OnDestroy {
      ) { }
 
   ngOnInit(): void {
-    this.association.getAssociationList().subscribe( (res: any) => {
-      this.associations = res;
-    });
-    this.statisticsService.get('Active members').subscribe( (res: any) => {
-      this.active_members = res[0];
-      this.refreshStatistic();
-    });
+    this.obs.push(
+      this.association.getAssociationList().subscribe( (res: any) => {
+        this.associations = res;
+      })
+    );
+    this.obs.push(
+      this.statisticsService.get('Active members').subscribe( (res: any) => {
+        this.active_members = res[0];
+        if(this.active_members?.max_value === 0){
+          this.active_members = null;
+        }
+        //this.refreshStatistic();
+      })
+    );
   }
 
   ngOnChanges(): void{
     //this.refreshStatistic();
   }
   ngOnDestroy(): void{
-    //
+    this.obs.forEach((ob: any) => {
+      ob.unsubscribe();
+    });
   }
 
   addAssociation(){
@@ -63,20 +74,23 @@ export class StatisticsComponent implements OnInit, OnChanges, OnDestroy {
     let users: any = [];
     let reports: any = [];
 
-    this.userService.getAllUsers().subscribe((res: any) => {
+    let sub = this.userService.getAllUsers().subscribe((res: any) => {
       res.forEach( (user: any) => {
         users.push({
           serviceID: user.serviceID,
           name: user.name
         });
       });
+      // sub.unsubscribe();
     });
-    this.reportService.getAll().subscribe((res: any) => {
+
+    sub = this.reportService.getAll().subscribe((res: any) => {
       res.forEach( (user: any) => {
         reports.push({
           serviceID: user.serviceID
         });
       });
+      // sub.unsubscribe();
     });
 
     if(this.active_members != null){
@@ -92,12 +106,11 @@ export class StatisticsComponent implements OnInit, OnChanges, OnDestroy {
       
       const fresh_statistic: Statistic = {
         name: this.active_members.name,
-        value: actives,
-        max_value: users.length as number,
+        value: 3,
+        max_value: 4,
         ID: this.active_members.ID,
         description: (!!this.active_members.description ? this.active_members.description : '' ),
       }
-      console.log("valami történt");
       this.statisticsService.update(fresh_statistic).then();
     }
     
