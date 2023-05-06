@@ -37,11 +37,10 @@ export class StatisticsComponent implements OnInit, OnChanges, OnDestroy {
     );
     this.obs.push(
       this.statisticsService.get('Active members').subscribe( (res: any) => {
-        this.active_members = res[0];
-        if(this.active_members?.max_value === 0){
-          this.active_members = null;
+        if( this.active_members === null){
+          this.refreshStatistic();
         }
-        //this.refreshStatistic();
+        this.active_members = res[0];
       })
     );
   }
@@ -81,7 +80,7 @@ export class StatisticsComponent implements OnInit, OnChanges, OnDestroy {
           name: user.name
         });
       });
-      // sub.unsubscribe();
+      this.obs.push(sub);
     });
 
     sub = this.reportService.getAll().subscribe((res: any) => {
@@ -90,7 +89,7 @@ export class StatisticsComponent implements OnInit, OnChanges, OnDestroy {
           serviceID: user.serviceID
         });
       });
-      // sub.unsubscribe();
+      this.obs.push(sub);
     });
 
     if(this.active_members != null){

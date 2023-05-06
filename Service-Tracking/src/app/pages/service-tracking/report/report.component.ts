@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Report } from 'src/app/models/Report';
 import { ReportService } from 'src/app/services/report.service';
@@ -9,7 +9,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './report.component.html',
   styleUrls: ['./report.component.scss']
 })
-export class ReportComponent implements OnInit {
+export class ReportComponent implements OnInit, OnDestroy {
 
   constructor(private reportService: ReportService, private userService: UserService) { }
 
@@ -24,13 +24,21 @@ export class ReportComponent implements OnInit {
   new_description = new FormControl('');
   new_start_date = new FormControl(new Date());
   new_end_date = new FormControl(new Date());
+
+  obs: any = [];
   
   ngOnInit(): void {
-    this.userService.getLoggedUser(JSON.parse(localStorage.getItem('user') as string).email).subscribe( (res: any) => {
+    this.obs[0] = this.userService.getLoggedUser(JSON.parse(localStorage.getItem('user') as string).email).subscribe( (res: any) => {
       localStorage.setItem('serviceID', res[0].serviceID as string);
     });
-    this.reportService.getMyAll().subscribe( (res: any) => {
+    this.obs[1] = this.reportService.getMyAll().subscribe( (res: any) => {
       this.reports = res;
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.obs.forEach((ob: any) => {
+      ob.unsubscribe();
     });
   }
 
