@@ -38,9 +38,11 @@ export class StatisticsComponent implements OnInit, OnChanges, OnDestroy {
     this.obs.push(
       this.statisticsService.get('Active members').subscribe( (res: any) => {
         if( this.active_members === null){
+          this.active_members = res[0];
           this.refreshStatistic();
+        } else {
+          this.active_members = res[0]; 
         }
-        this.active_members = res[0];
       })
     );
   }
@@ -70,48 +72,42 @@ export class StatisticsComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   refreshStatistic(){
-    let users: any = [];
-    let reports: any = [];
+    let users: any;
+    let reports: any = undefined;
 
     let sub = this.userService.getAllUsers().subscribe((res: any) => {
-      res.forEach( (user: any) => {
-        users.push({
-          serviceID: user.serviceID,
-          name: user.name
-        });
-      });
-      this.obs.push(sub);
+      users = res;
     });
+    this.obs.push(sub);
 
     sub = this.reportService.getAll().subscribe((res: any) => {
-      res.forEach( (user: any) => {
-        reports.push({
-          serviceID: user.serviceID
-        });
-      });
-      this.obs.push(sub);
-    });
-
-    if(this.active_members != null){
-      let actives: number = 0;
-      users.forEach((user: any) => {
-        for (const report of reports) {
-          if (user.serviceID === report.serviceID) {
-            actives += 1;
-            break;
+      if(reports === undefined){
+        reports = res;
+        if(this.active_members != null){
+          let actives: number = 0;
+          users.forEach((user: any) => {
+            for (const report of reports) {
+              if (user.serviceID === report.serviceID) {
+                actives += 1;
+                break;
+              }
+            }
+          });
+          const fresh_statistic: Statistic = {
+            name: this.active_members.name,
+            value: actives,
+            max_value: users.length,
+            ID: this.active_members.ID,
+            description: (!!this.active_members.description ? this.active_members.description : '' ),
           }
+          this.statisticsService.update(fresh_statistic).then();
         }
-      });
-      
-      const fresh_statistic: Statistic = {
-        name: this.active_members.name,
-        value: 3,
-        max_value: 4,
-        ID: this.active_members.ID,
-        description: (!!this.active_members.description ? this.active_members.description : '' ),
+      } else {
+        reports = res;
       }
-      this.statisticsService.update(fresh_statistic).then();
-    }
-    
+    });
+    this.obs.push(sub);
   }
+
+
 }

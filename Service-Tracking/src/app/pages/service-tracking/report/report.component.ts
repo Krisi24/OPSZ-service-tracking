@@ -30,9 +30,12 @@ export class ReportComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.obs[0] = this.userService.getLoggedUser(JSON.parse(localStorage.getItem('user') as string).email).subscribe( (res: any) => {
       localStorage.setItem('serviceID', res[0].serviceID as string);
-    });
-    this.obs[1] = this.reportService.getMyAll().subscribe( (res: any) => {
-      this.reports = res;
+
+      if(this.reports === undefined){
+        this.obs[1] = this.reportService.getMyAll().subscribe( (res: any) => {
+          this.reports = res;
+        });
+      }
     });
   }
 
