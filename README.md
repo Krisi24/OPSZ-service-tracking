@@ -1,7 +1,7 @@
 # OPSZ-service-tracking
 https://service-tracking-95ddc.web.app
 
-Szabadon választott témát választottam: Szolgálat követő rendszer
+Saját témát választottam: Szolgálat követő rendszer
 
 Szolgálat követő rendszer:
  - lehet jelentéseket készíteni, szolgálat kezdeti/vég idő megadásával
